@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import nodeLogo from '../assets/images/logoassets/Node.png';
 import tailwindLogo from '../assets/images/logoassets/Tailwind.png';
-import reactLogo from '../assets/images/logoassets/react.png';
+import reactLogo from '../assets/images/logoassets/React.png';
 import jsLogo from '../assets/images/logoassets/js.png';
 import htmlLogo from '../assets/images/logoassets/HTML.png';
 import cssLogo from '../assets/images/logoassets/CSS.png';
