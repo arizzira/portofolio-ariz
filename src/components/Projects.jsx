@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { FaGithub, FaExternalLinkAlt, FaChevronLeft, FaChevronRight, FaArrowRight } from "react-icons/fa";
-
 import p1_1 from '../assets/images/porto/porto1/porto1-1.png';
 import p1_2 from '../assets/images/porto/porto1/porto1-2.png';
 import p1_3 from '../assets/images/porto/porto1/porto1-3.png';
@@ -8,13 +7,11 @@ import p1_4 from '../assets/images/porto/porto1/porto1-4.png';
 import p1_5 from '../assets/images/porto/porto1/porto1-5.png';
 import p1_6 from '../assets/images/porto/porto1/porto1-6.png';
 import p1_7 from '../assets/images/porto/porto1/porto1-7.png';
-
 import p2_1 from '../assets/images/porto/porto2/porto2-1.png';
 import p2_2 from '../assets/images/porto/porto2/porto2-2.png';
 import p2_3 from '../assets/images/porto/porto2/porto2-3.png';
 import p2_4 from '../assets/images/porto/porto2/porto2-4.png';
 import p2_5 from '../assets/images/porto/porto2/porto2-5.png';
-
 import p3_1 from '../assets/images/porto/porto3/porto3-1.png';
 
 
@@ -51,9 +48,36 @@ const projects = [
   }
 ];
 
-
 const ImageSlider = ({ images }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [touchStart, setTouchStart] = useState(null);
+  const [touchEnd, setTouchEnd] = useState(null);
+  const minSwipeDistance = 50;
+
+  const onTouchStart = (e) => {
+    setTouchEnd(null); 
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+
+    if (isLeftSwipe) {
+      nextSlide();
+    }
+    if (isRightSwipe) {
+      prevSlide();
+    }
+  };
+
 
   const prevSlide = () => {
     const isFirstSlide = currentIndex === 0;
@@ -70,7 +94,12 @@ const ImageSlider = ({ images }) => {
   if (images.length === 0) return null;
 
   return (
-    <div className="relative w-full h-64 md:h-80 group rounded-xl overflow-hidden shadow-xl border border-white/10 transition-transform duration-300 hover:scale-[1.02]">
+    <div 
+      className="relative w-full h-64 md:h-80 group rounded-xl overflow-hidden shadow-xl border border-white/10 transition-transform duration-300 hover:scale-[1.02]"
+      onTouchStart={onTouchStart}
+      onTouchMove={onTouchMove}
+      onTouchEnd={onTouchEnd}
+    >
       <div 
         style={{ backgroundImage: `url(${images[currentIndex]})` }} 
         className="w-full h-full bg-center bg-cover duration-500 ease-in-out"
@@ -84,7 +113,6 @@ const ImageSlider = ({ images }) => {
           <div className="hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] right-5 text-2xl rounded-full p-2 bg-black/50 text-white cursor-pointer hover:bg-black/70 transition-all z-10">
             <FaChevronRight onClick={nextSlide} size={20} />
           </div>
-          
           <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2 z-10">
             {images.map((_, slideIndex) => (
               <div
@@ -104,11 +132,10 @@ const ImageSlider = ({ images }) => {
   );
 };
 
-
 const Projects = () => {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef(null);
-
+  
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
