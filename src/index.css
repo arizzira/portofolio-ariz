@@ -1,1 +1,30 @@
-@import 'tailwindcss';
+@import "tailwindcss";
+
+/* Hapus keyframes manual lama jika ingin menggunakan Framer Motion sepenuhnya. 
+   Kita reset default style agar clean. */
+
+@theme {
+  --color-primary: #6366f1; /* Indigo-500 */
+  --color-secondary: #a855f7; /* Purple-500 */
+  --font-display: "Inter", sans-serif; /* Ganti jika punya font khusus */
+}
+
+/* Base Styles */
+body {
+  @apply bg-slate-50 text-slate-900 dark:bg-[#0a0a0a] dark:text-slate-100 antialiased;
+  overflow-x: hidden;
+}
+
+/* Scrollbar Modern */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-300 dark:bg-slate-800 rounded-full;
+}
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-slate-400 dark:bg-slate-700;
+}

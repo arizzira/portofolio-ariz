@@ -1,4 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { FaCode, FaServer, FaTools, FaLaptopCode } from "react-icons/fa";
+
+// Import Gambar (Sama seperti sebelumnya)
 import nodeLogo from '../assets/images/logoassets/Node.png';
 import tailwindLogo from '../assets/images/logoassets/Tailwind.png';
 import reactLogo from '../assets/images/logoassets/React.png';
@@ -16,137 +19,141 @@ import hapiLogo from '../assets/images/logoassets/hapi.png';
 import pythonLogo from '../assets/images/logoassets/pythonn.png';
 
 const Skills = () => {
-  // 1. Setup State dan Ref untuk deteksi scroll
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef(null);
+
+  const skillsData = [
+    {
+      title: "Frontend Development",
+      icon: <FaCode className="text-cyan-600 dark:text-cyan-400 text-2xl" />,
+      desc: "Building responsive & interactive UI",
+      skills: [
+        { name: "HTML5", img: htmlLogo },
+        { name: "CSS3", img: cssLogo },
+        { name: "JavaScript", img: jsLogo },
+        { name: "React", img: reactLogo },
+        { name: "Tailwind", img: tailwindLogo },
+      ]
+    },
+    {
+      title: "Backend & Database",
+      icon: <FaServer className="text-indigo-600 dark:text-indigo-400 text-2xl" />,
+      desc: "Server-side logic & data management",
+      skills: [
+        { name: "Node.js", img: nodeLogo },
+        { name: "MySQL", img: mysqlLogo },
+        { name: "PhpMyAdmin", img: pmaLogo },
+      ]
+    },
+    {
+      title: "Tools & Workflow",
+      icon: <FaTools className="text-purple-600 dark:text-purple-400 text-2xl" />,
+      desc: "Essential tools for development",
+      skills: [
+        { name: "VS Code", img: vscodeLogo },
+        { name: "Postman", img: postmanLogo },
+        { name: "Figma", img: figmaLogo },
+        { name: "GitHub", img: githubLogo },
+      ]
+    },
+    {
+      title: "Currently Learning",
+      icon: <FaLaptopCode className="text-emerald-600 dark:text-emerald-400 text-2xl" />,
+      desc: "Expanding my tech stack",
+      skills: [
+        { name: "PHP", img: phpLogo },
+        { name: "Hapi", img: hapiLogo },
+        { name: "Python", img: pythonLogo },
+      ]
+    }
+  ];
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        // Jika elemen muncul di layar, set isVisible jadi true
         if (entry.isIntersecting) {
           setIsVisible(true);
-          observer.unobserve(sectionRef.current); // Stop observe biar animasi cuma sekali
+          observer.unobserve(sectionRef.current);
         }
       },
-      { threshold: 0.1 } // Trigger saat 10% elemen terlihat
+      { threshold: 0.1 }
     );
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => {
-      if (sectionRef.current) observer.disconnect();
-    };
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => { if (sectionRef.current) observer.disconnect(); };
   }, []);
 
   return (
-    <>
-      <style>
-        {`
-          @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(40px); }
-            to { opacity: 1; transform: translateY(0); }
-          }
+    <section 
+      id="skills" 
+      ref={sectionRef} 
+      // UBAH: Background terang di light mode
+      className="py-24 bg-slate-50 dark:bg-black relative overflow-hidden"
+    >
+        
+        {/* Background Decorative Elements */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-7xl pointer-events-none">
+            {/* UBAH: Warna blob disesuaikan opacity-nya */}
+            <div className="absolute top-20 left-20 w-72 h-72 bg-indigo-200/50 dark:bg-indigo-900/10 rounded-full blur-[100px]"></div>
+            <div className="absolute bottom-20 right-20 w-72 h-72 bg-cyan-200/50 dark:bg-cyan-900/10 rounded-full blur-[100px]"></div>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
           
-          /* Class untuk menjalankan animasi */
-          .animate-active {
-            animation: fadeInUp 0.8s ease-out forwards;
-          }
-
-          /* Class untuk menyembunyikan elemen sebelum di-scroll */
-          .opacity-0-start {
-             opacity: 0;
-          }
-
-          /* Delays untuk efek berurutan */
-          .delay-100 { animation-delay: 0.1s; }
-          .delay-200 { animation-delay: 0.2s; }
-          .delay-300 { animation-delay: 0.3s; }
-          .delay-400 { animation-delay: 0.4s; }
-          .delay-500 { animation-delay: 0.5s; }
-          .delay-600 { animation-delay: 0.6s; }
-          .delay-700 { animation-delay: 0.7s; }
-          .delay-800 { animation-delay: 0.8s; }
-        `}
-      </style>
-
-      {/* 2. Pasang ref={sectionRef} */}
-      <section id="skills" ref={sectionRef} className="py-20 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 text-center">
-
-          {/* Logika Class: Jika isVisible ? animate-active : opacity-0-start */}
-          
-          <div className={isVisible ? "animate-active delay-100" : "opacity-0-start"}>
-            <h2 className="text-4xl font-bold text-white mb-4">Skills & Technologies</h2>
-            <p className="text-slate-400 mb-16">
-              Tools and technologies I use to build things.
+          <div className={`text-center mb-16 transition-all duration-1000 transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+            <h2 className="text-4xl font-bold text-slate-900 dark:text-white mb-4">Technical Proficiency</h2>
+            <p className="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
+              A curated list of technologies I use to build robust and scalable digital products.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-y-16 gap-x-10">
-            
-            <div className={`flex flex-col items-center ${isVisible ? "animate-active delay-300" : "opacity-0-start"}`}>
-              <h3 className="text-2xl font-semibold text-white mb-8">Back-End</h3>
-              <div className="flex flex-wrap justify-center gap-6">
-                 <img src={nodeLogo} alt="Node.js" className="h-16 w-auto object-contain hover:scale-110 transition-transform duration-300" />
-              </div>
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {skillsData.map((category, index) => (
+              <div 
+                key={index}
+                // UBAH: Kartu putih solid + shadow di light mode
+                className={`bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl p-8 hover:shadow-lg dark:hover:bg-white/10 transition-all duration-500 hover:-translate-y-2 group
+                  ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
+                style={{ transitionDelay: `${index * 150}ms` }}
+              >
+                {/* Card Header */}
+                <div className="flex items-start gap-4 mb-8 border-b border-slate-100 dark:border-white/5 pb-6">
+                    <div className="p-3 bg-slate-100 dark:bg-white/5 rounded-xl group-hover:bg-slate-200 dark:group-hover:bg-white/10 transition-colors">
+                        {category.icon}
+                    </div>
+                    <div>
+                        <h3 className="text-xl font-bold text-slate-900 dark:text-white">{category.title}</h3>
+                        <p className="text-sm text-slate-500 dark:text-slate-400">{category.desc}</p>
+                    </div>
+                </div>
 
-            <div className={`flex flex-col items-center ${isVisible ? "animate-active delay-400" : "opacity-0-start"}`}>
-              <h3 className="text-2xl font-semibold text-white mb-8">Front-End</h3>
-              <div className="flex flex-wrap justify-center items-center gap-6 max-w-xs">
-                 <img src={tailwindLogo} alt="Tailwind CSS" className="h-10 w-auto object-contain hover:scale-110 transition-transform duration-300" />
-                 <img src={reactLogo} alt="React" className="h-14 w-auto object-contain hover:scale-110 transition-transform duration-300" />
-                 <img src={jsLogo} alt="JavaScript" className="h-12 w-auto object-contain hover:scale-110 transition-transform duration-300" />
-                 <div className="flex gap-6 w-full justify-center mt-2">
-                   <img src={htmlLogo} alt="HTML5" className="h-14 w-auto object-contain hover:scale-110 transition-transform duration-300" />
-                   <img src={cssLogo} alt="CSS3" className="h-14 w-auto object-contain hover:scale-110 transition-transform duration-300" />
-                 </div>
+                {/* Skills Grid inside Card */}
+                <div className="flex flex-wrap gap-4">
+                    {category.skills.map((skill, idx) => (
+                        <div key={idx} className="flex flex-col items-center gap-2 group/icon">
+                            {/* UBAH: Kotak icon jadi slate-100 di light mode */}
+                            <div className="w-14 h-14 bg-slate-50 dark:bg-black/40 rounded-xl flex items-center justify-center border border-slate-200 dark:border-white/5 group-hover/icon:border-indigo-500/30 transition-all duration-300 relative overflow-hidden shadow-sm dark:shadow-none">
+                                {/* Glow Effect on Hover */}
+                                <div className="absolute inset-0 bg-indigo-500/10 dark:bg-indigo-500/20 opacity-0 group-hover/icon:opacity-100 transition-opacity blur-md"></div>
+                                
+                                <img 
+                                    src={skill.img} 
+                                    alt={skill.name} 
+                                    className="h-8 w-auto object-contain relative z-10 group-hover/icon:scale-110 transition-transform duration-300" 
+                                />
+                            </div>
+                            <span className="text-xs text-slate-600 dark:text-slate-500 font-medium group-hover/icon:text-indigo-600 dark:group-hover/icon:text-indigo-300 transition-colors">
+                                {skill.name}
+                            </span>
+                        </div>
+                    ))}
+                </div>
               </div>
-            </div>
-
-            <div className={`flex flex-col items-center ${isVisible ? "animate-active delay-500" : "opacity-0-start"}`}>
-              <h3 className="text-2xl font-semibold text-white mb-8">Database</h3>
-              <div className="flex flex-wrap justify-center items-center gap-6">
-                 <img src={mysqlLogo} alt="MySQL" className="h-16 w-auto object-contain hover:scale-110 transition-transform duration-300" />
-                 <img src={pmaLogo} alt="phpMyAdmin" className="h-14 w-auto object-contain hover:scale-110 transition-transform duration-300" />
-              </div>
-            </div>
-
-            <div className={`flex flex-col items-center ${isVisible ? "animate-active delay-600" : "opacity-0-start"}`}>
-              <h3 className="text-2xl font-semibold text-white mb-8">Languages</h3>
-              <div className="flex flex-wrap justify-center gap-6">
-                 <img src={jsLogo} alt="JavaScript" className="h-16 w-auto object-contain hover:scale-110 transition-transform duration-300" />
-              </div>
-            </div>
-
-            <div className={`flex flex-col items-center ${isVisible ? "animate-active delay-700" : "opacity-0-start"}`}>
-              <h3 className="text-2xl font-semibold text-white mb-8">Tools</h3>
-              <div className="grid grid-cols-2 gap-6 place-items-center">
-                 <img src={vscodeLogo} alt="VS Code" className="h-12 w-auto object-contain hover:scale-110 transition-transform duration-300" />
-                 <img src={postmanLogo} alt="Postman" className="h-12 w-auto object-contain hover:scale-110 transition-transform duration-300" />
-                 <img src={figmaLogo} alt="Figma" className="h-12 w-auto object-contain hover:scale-110 transition-transform duration-300" />
-                 <img src={githubLogo} alt="GitHub" className="h-12 w-auto object-contain hover:scale-110 transition-transform duration-300" />
-              </div>
-            </div>
-
-            <div className={`flex flex-col items-center ${isVisible ? "animate-active delay-800" : "opacity-0-start"}`}>
-              <h3 className="text-2xl font-semibold text-white mb-8">Currently Learning</h3>
-              <div className="flex flex-wrap justify-center items-center gap-6">
-                 <div className="flex gap-4">
-                     <img src={phpLogo} alt="PHP" className="h-10 w-auto object-contain hover:scale-110 transition-transform duration-300" />
-                     <img src={hapiLogo} alt="Hapi" className="h-10 w-auto object-contain hover:scale-110 transition-transform duration-300 grayscale hover:grayscale-0 opacity-80 hover:opacity-100" />
-                 </div>
-                 <img src={pythonLogo} alt="Python" className="h-14 w-auto object-contain hover:scale-110 transition-transform duration-300" />
-              </div>
-            </div>
-
+            ))}
           </div>
+
         </div>
-      </section>
-    </>
+    </section>
   );
 };
 
