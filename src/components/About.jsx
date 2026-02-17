@@ -1,106 +1,137 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { FaGraduationCap, FaCode, FaBriefcase, FaServer } from "react-icons/fa";
+import React from 'react';
+import { motion } from "framer-motion";
+import { FaGraduationCap, FaBriefcase, FaCode } from "react-icons/fa";
 
 const About = () => {
-  const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef(null);
+  // Variabel untuk animasi stagger (muncul berurutan)
+  const containerVars = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2
+      }
+    }
+  };
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.unobserve(sectionRef.current);
-        }
-      },
-      { threshold: 0.2 }
-    );
-
-    if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => { if (sectionRef.current) observer.disconnect(); };
-  }, []);
+  const itemVars = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "backOut" } }
+  };
 
   return (
-    <section 
-      id="about" 
-      ref={sectionRef} 
-      // UBAH: Background terang di light mode
-      className="relative py-24 bg-slate-50 dark:bg-slate-950 overflow-hidden"
-    >
-        {/* UBAH: Blob warna disesuaikan transparansinya untuk light mode */}
-        <div className="absolute top-1/4 -left-20 w-96 h-96 bg-indigo-200/40 dark:bg-indigo-900/20 rounded-full blur-[128px] -z-10 pointer-events-none"></div>
-        <div className="absolute bottom-0 -right-20 w-96 h-96 bg-purple-200/40 dark:bg-purple-900/20 rounded-full blur-[128px] -z-10 pointer-events-none"></div>
+    <section id="about" className="relative py-24 bg-white dark:bg-[#050505] border-t-4 border-black dark:border-white transition-colors duration-500 overflow-hidden">
+        
+        {/* 1. Background Grid Pattern (Konsisten dengan section lain) */}
+        <div className="absolute inset-0 bg-[size:40px_40px] bg-[linear-gradient(to_right,#00000005_1px,transparent_1px),linear-gradient(to_bottom,#00000005_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] pointer-events-none z-0"></div>
 
-        <div className="max-w-7xl mx-auto px-6">
+        {/* Dekorasi Garis Kiri (Animated) */}
+        <motion.div 
+            initial={{ height: 0 }}
+            whileInView={{ height: "100%" }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.5, ease: "easeInOut" }}
+            className="absolute top-0 left-6 md:left-10 w-4 bg-[#f0f0f0] dark:bg-zinc-900 border-x-2 border-black dark:border-white/20 hidden md:block z-0"
+        ></motion.div>
+
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
             
-            <div className={`mb-16 md:text-center max-w-3xl mx-auto transition-all duration-1000 transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-                {/* UBAH: Warna accent lebih gelap di light mode agar terbaca */}
-                <h2 className="text-sm font-bold tracking-widest text-indigo-600 dark:text-indigo-400 uppercase mb-3">About Me</h2>
-                
-                <h3 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white leading-tight">
-                    Transforming complex problems into <br className="hidden md:block"/> 
-                    <span className="text-slate-500 dark:text-slate-500">elegant digital solutions.</span>
+            {/* Header Section */}
+            <motion.div 
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8 }}
+                className="mb-16 md:pl-20"
+            >
+                <div className="inline-block bg-black dark:bg-white text-white dark:text-black px-4 py-1 font-bold uppercase tracking-widest text-lg mb-4 transform -rotate-1 shadow-[4px_4px_0px_0px_rgba(168,85,247,1)]">
+                    About Me
+                </div>
+                <h3 className="text-4xl md:text-6xl font-black text-black dark:text-white leading-tight">
+                    SOLVING PUZZLES <br />
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600 dark:from-indigo-400 dark:to-cyan-400 stroke-black dark:stroke-white stroke-1">
+                        WITH ELEGANT CODE.
+                    </span>
                 </h3>
-            </div>
+            </motion.div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:pl-20">
                 
-                {/* Column 1: Narrative Text */}
-                {/* UBAH: Text slate-600 untuk light mode */}
-                <div className={`space-y-6 text-slate-600 dark:text-slate-300 leading-relaxed text-lg transition-all duration-1000 delay-200 transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-                    <p>
-                        Hello! I'm <span className="text-slate-900 dark:text-white font-semibold">Muhammad Ariz</span>, a final-year Informatics Engineering student. 
-                        My journey in web development started with a curiosity about how things work on the internet, 
-                        which has now evolved into a passion for building robust <span className="text-indigo-600 dark:text-indigo-400">full-stack applications</span>.
-                    </p>
-                    <p>
-                        Recently, I contributed as a <span className="text-slate-900 dark:text-white font-semibold">UI/UX Designer & Front-End Developer</span> for a capstone project 
-                        collaborated with <strong>Dicoding x Accenture</strong>. This experience honed my ability to merge aesthetic design with functional code.
-                    </p>
-                    <p>
-                        When I'm not coding, you can find me exploring new Linux distros (currently utilizing <span className="text-slate-900 dark:text-white">Ubuntu</span> as my daily driver), 
-                        configuring my development environment, or learning about scalable system architecture.
-                    </p>
-                </div>
+                {/* Column 1: Narrative (Text Box) */}
+                <motion.div 
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                    className="lg:col-span-7 bg-[#fffd87] dark:bg-zinc-800 p-8 border-4 border-black dark:border-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:shadow-[8px_8px_0px_0px_rgba(255,255,255,1)] relative"
+                >
+                    {/* Hiasan Pin Kertas */}
+                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-red-500 border-2 border-black"></div>
 
-                {/* Column 2: Bento Grid / Stats Cards */}
-                <div className={`grid grid-cols-1 sm:grid-cols-2 gap-4 transition-all duration-1000 delay-400 transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+                    <p className="text-base md:text-lg font-mono font-medium text-black dark:text-white leading-loose text-justify">
+                        Hello! I'm <strong className="bg-white dark:bg-black px-1 border border-black dark:border-white">Muhammad Ariz</strong>. 
+                        My journey started with a simple "Hello World" and evolved into a relentless pursuit of building 
+                        robust full-stack ecosystems.
+                    </p>
+                    <br />
+                    <p className="text-base md:text-lg font-mono font-medium text-black dark:text-white leading-loose text-justify">
+                        Currently rocking as a <span className="bg-indigo-500 text-white px-1 border border-black dark:border-none">UI/UX & Frontend Dev</span> 
+                        for the Capstone Project at <strong>Dicoding x Accenture</strong>. 
+                        Also a Linux enthusiast (Ubuntu gang 🐧) and architecture geek.
+                    </p>
+                </motion.div>
+
+                {/* Column 2: Stacked Cards (Staggered Animation) */}
+                <motion.div 
+                    variants={containerVars}
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={{ once: true }}
+                    className="lg:col-span-5 flex flex-col gap-6"
+                >
                     
-                    {/* Card 1: Education */}
-                    {/* UBAH: bg-white + border-slate-200 + shadow-sm untuk light mode */}
-                    <div className="p-6 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl shadow-sm dark:shadow-none hover:shadow-md dark:hover:bg-white/10 transition-all hover:-translate-y-1 group">
-                        <div className="w-10 h-10 bg-indigo-100 dark:bg-indigo-600/20 rounded-lg flex items-center justify-center mb-4 group-hover:bg-indigo-600 transition-colors">
-                            <FaGraduationCap className="text-indigo-600 dark:text-indigo-400 group-hover:text-white" />
-                        </div>
-                        <h4 className="text-slate-900 dark:text-white font-semibold text-lg mb-1">Education</h4>
-                        <p className="text-slate-500 dark:text-slate-400 text-sm">S1 Informatics Engineering<br/>STIKOM Poltek Cirebon</p>
-                    </div>
-
-                    {/* Card 2: Experience */}
-                    <div className="p-6 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl shadow-sm dark:shadow-none hover:shadow-md dark:hover:bg-white/10 transition-all hover:-translate-y-1 group">
-                        <div className="w-10 h-10 bg-purple-100 dark:bg-purple-600/20 rounded-lg flex items-center justify-center mb-4 group-hover:bg-purple-600 transition-colors">
-                            <FaBriefcase className="text-purple-600 dark:text-purple-400 group-hover:text-white" />
-                        </div>
-                        <h4 className="text-slate-900 dark:text-white font-semibold text-lg mb-1">Experience</h4>
-                        <p className="text-slate-500 dark:text-slate-400 text-sm">Capstone Project<br/>Dicoding x Accenture</p>
-                    </div>
-
-                    {/* Card 3: Tech Focus (Wide Card) */}
-                    <div className="sm:col-span-2 p-6 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl shadow-sm dark:shadow-none hover:shadow-md dark:hover:bg-white/10 transition-all hover:-translate-y-1 group">
-                         <div className="flex items-center justify-between mb-4">
-                            <div className="w-10 h-10 bg-cyan-100 dark:bg-cyan-600/20 rounded-lg flex items-center justify-center group-hover:bg-cyan-600 transition-colors">
-                                <FaCode className="text-cyan-600 dark:text-cyan-400 group-hover:text-white" />
+                    {/* Education Card */}
+                    <motion.div variants={itemVars} className="group bg-white dark:bg-black p-6 border-4 border-black dark:border-white shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] dark:shadow-[6px_6px_0px_0px_rgba(255,255,255,1)] hover:-translate-y-1 hover:shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] transition-all duration-300">
+                        <div className="flex items-start justify-between">
+                            <div>
+                                <h4 className="text-xl font-black text-black dark:text-white uppercase group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">Education</h4>
+                                <p className="text-sm font-bold text-zinc-500 mt-1">STIKOM Poltek Cirebon</p>
+                                <p className="text-[10px] md:text-xs font-mono bg-zinc-100 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 px-2 py-1 mt-2 w-fit text-black dark:text-white">Informatics Engineering</p>
                             </div>
-                            <span className="text-[10px] font-mono text-slate-500 border border-slate-300 dark:border-slate-700 px-2 py-1 rounded uppercase tracking-wider">Current Stack</span>
-                         </div>
-                        <h4 className="text-slate-900 dark:text-white font-semibold text-lg mb-2">Technical Focus</h4>
-                        <p className="text-slate-500 dark:text-slate-400 text-sm">
-                            Building scalable web apps using <span className="text-slate-900 dark:text-white">React, Vite, TailwindCSS</span>, and <span className="text-slate-900 dark:text-white">PostgreSQL</span>. 
-                            Currently exploring <span className="text-slate-900 dark:text-white">Golang</span> for high-performance backend services.
-                        </p>
-                    </div>
+                            <div className="p-3 bg-indigo-100 dark:bg-indigo-900 border-2 border-black dark:border-white rounded-md">
+                                <FaGraduationCap className="text-2xl text-black dark:text-white" />
+                            </div>
+                        </div>
+                    </motion.div>
 
-                </div>
+                    {/* Experience Card */}
+                    <motion.div variants={itemVars} className="group bg-[#ff90e8] p-6 border-4 border-black dark:border-white shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] dark:shadow-[6px_6px_0px_0px_rgba(255,255,255,1)] hover:-translate-y-1 hover:shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] transition-all duration-300">
+                        <div className="flex items-start justify-between">
+                            <div>
+                                <h4 className="text-xl font-black text-black uppercase">Experience</h4>
+                                <p className="text-sm font-bold text-black/80 mt-1">Dicoding x Accenture</p>
+                                <p className="text-[10px] md:text-xs font-mono bg-black text-white px-2 py-1 mt-2 w-fit border border-black">Capstone Project</p>
+                            </div>
+                            <div className="p-3 bg-white border-2 border-black rounded-md">
+                                <FaBriefcase className="text-2xl text-black" />
+                            </div>
+                        </div>
+                    </motion.div>
+
+                    {/* Tech Focus */}
+                    <motion.div variants={itemVars} className="group bg-cyan-300 p-6 border-4 border-black dark:border-white shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] dark:shadow-[6px_6px_0px_0px_rgba(255,255,255,1)] hover:-translate-y-1 hover:shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] transition-all duration-300">
+                        <div className="flex items-center gap-3 mb-3">
+                             <div className="p-2 bg-black text-white rounded-sm">
+                                <FaCode className="text-xl" />
+                             </div>
+                             <h4 className="text-xl font-black text-black uppercase">Current Focus</h4>
+                        </div>
+                        <p className="font-mono font-bold text-xs md:text-sm text-black leading-relaxed">
+                            React, Vite, Tailwind, PostgreSQL, and currently diving into Golang.
+                        </p>
+                    </motion.div>
+
+                </motion.div>
 
             </div>
         </div>
