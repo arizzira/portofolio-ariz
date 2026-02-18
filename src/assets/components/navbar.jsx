@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { FaSun, FaMoon, FaBars, FaTimes } from "react-icons/fa";
 
 const Navbar = ({ theme, setTheme }) => {
-
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -17,6 +16,23 @@ const Navbar = ({ theme, setTheme }) => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const handleScrollToSection = (e, id) => {
+    e.preventDefault();
+    setIsOpen(false);
+
+    const element = document.getElementById(id);
+    if (element) {
+      const headerOffset = 100;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.scrollY - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
+    }
+  };
 
   const getNavStyle = () => {
     if (scrolled) {
@@ -37,7 +53,10 @@ const Navbar = ({ theme, setTheme }) => {
       >
         <div className={`relative flex items-center justify-between px-6 transition-all duration-500 ${getNavStyle()}`}>
           
-          <div className="flex items-center gap-2 cursor-pointer">
+          <div 
+            className="flex items-center gap-2 cursor-pointer"
+            onClick={(e) => handleScrollToSection(e, 'home')}
+          >
             <span className={`font-black text-xl tracking-tighter ${theme === 'light' ? 'text-black' : 'text-white'}`}>
               Ariz
             </span>
@@ -48,7 +67,8 @@ const Navbar = ({ theme, setTheme }) => {
               <li key={item}>
                 <a
                   href={`#${item.toLowerCase()}`}
-                  className={`relative text-sm font-bold uppercase tracking-wider transition-colors
+                  onClick={(e) => handleScrollToSection(e, item.toLowerCase())}
+                  className={`relative text-sm font-bold uppercase tracking-wider transition-colors cursor-pointer
                     ${theme === 'light' 
                         ? 'text-black hover:bg-black hover:text-white px-2 py-1' 
                         : 'text-zinc-300 hover:text-indigo-400'
@@ -63,7 +83,6 @@ const Navbar = ({ theme, setTheme }) => {
 
           <div className="flex items-center gap-4">
             
-            {/* --- BAGIAN YANG DITAMBAHKAN --- */}
             <button 
                 onClick={toggleTheme} 
                 className="text-2xl cursor-pointer transition-transform hover:rotate-12 active:scale-90"
@@ -75,7 +94,6 @@ const Navbar = ({ theme, setTheme }) => {
                   <FaSun className="text-white" />
                 )}
             </button>
-            {/* ------------------------------- */}
 
             <button 
                 onClick={() => setIsOpen(!isOpen)} 
@@ -109,7 +127,7 @@ const Navbar = ({ theme, setTheme }) => {
                 <a 
                   key={item} 
                   href={`#${item.toLowerCase()}`} 
-                  onClick={() => setIsOpen(false)}
+                  onClick={(e) => handleScrollToSection(e, item.toLowerCase())}
                   className={`text-5xl font-black uppercase hover:scale-110 transition-transform cursor-pointer
                     ${theme === 'light' ? 'text-black stroke-white' : 'text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-cyan-400'}
                   `}
