@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { FaGithub, FaLinkedin, FaArrowDown, FaEnvelope, FaDownload } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaArrowDown, FaEnvelope, FaDownload, FaCircle } from "react-icons/fa";
 import profileImg from "../assets/images/profile/profile.png";
 import cvFile from "../assets/cv-ariz.pdf"; 
 
@@ -13,12 +13,13 @@ const Hero = () => {
   });
   
   const xMove = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
+  const yMove = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
 
   return (
     <section 
       ref={ref} 
       id="home" 
-      className="relative min-h-screen flex flex-col justify-center overflow-hidden px-6 pt-28 pb-10 bg-white dark:bg-[#050505] transition-colors duration-500"
+      className="relative min-h-screen flex flex-col justify-center overflow-hidden px-6 pt-28 pb-10 transition-colors duration-500 bg-white dark:bg-[#050505]"
     >
       
       <div className="absolute inset-0 z-0 pointer-events-none">
@@ -78,6 +79,7 @@ const Hero = () => {
             Hi, I'm <strong>Muhammad Ariz</strong>. I craft <span className="bg-yellow-300 dark:bg-indigo-600 px-1 border border-black dark:border-transparent text-black dark:text-white">high-performance</span> web experiences with modern technologies and clean code.
           </motion.p>
 
+          {/* Buttons Area */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -102,18 +104,30 @@ const Hero = () => {
           </motion.div>
         </div>
 
+        {/* === RIGHT: IMAGE === */}
         <div className="relative order-1 lg:order-2 flex justify-center lg:justify-end items-center mt-10 lg:mt-0">
+            
             <motion.div 
                initial={{ scale: 0.9, opacity: 0 }} 
                animate={{ scale: 1, opacity: 1 }}
                transition={{ type: "spring", duration: 0.8 }}
                className="relative z-10 cursor-pointer group w-[280px] md:w-[350px] lg:w-[400px] aspect-[4/5]"
             >
+                {/* Decorative Elements Light Mode */}
                 <div className="absolute -top-4 -right-4 w-12 h-12 bg-yellow-400 border-2 border-black rounded-full z-20 flex items-center justify-center dark:hidden">
                     <FaArrowDown className="-rotate-45 text-black" />
                 </div>
+
+                {/* Back Shape (Shadow) */}
                 <div className="absolute inset-0 bg-black dark:bg-indigo-600 translate-x-3 translate-y-3 md:translate-x-5 md:translate-y-5 border-2 border-black dark:border-none transition-transform duration-300 group-hover:translate-x-2 group-hover:translate-y-2"></div>
+
+                {/* Main Image Frame */}
                 <div className="absolute inset-0 bg-white dark:bg-zinc-800 border-4 border-black dark:border-white overflow-hidden">
+                    {/* LOGIKA CSS FIX MOBILE:
+                       1. grayscale-0 (default) -> Mobile langsung berwarna
+                       2. md:grayscale (desktop only) -> Desktop jadi hitam putih
+                       3. md:group-hover:grayscale-0 -> Desktop jadi berwarna saat di-hover
+                    */}
                     <img 
                       src={profileImg} 
                       alt="Muhammad Ariz" 
@@ -125,27 +139,21 @@ const Hero = () => {
 
       </div>
 
-      {/* --- SCROLL DOWN INDICATOR (PERBAIKAN) --- */}
+      {/* Scroll Down Indicator */}
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1, y: [0, 10, 0] }} 
         transition={{ delay: 1, duration: 2, repeat: Infinity }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-30" // Tambahkan z-30 dan naikkan bottom-8
+        className="absolute bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
       >
-         {/* Garis Indikator */}
          <div className="w-[2px] h-12 bg-gradient-to-b from-transparent via-black dark:via-white to-transparent"></div>
-         
-         {/* Teks Scroll */}
-         <span className="text-[10px] font-black uppercase tracking-widest text-black dark:text-white bg-white/50 dark:bg-black/50 px-2 rounded-full backdrop-blur-sm">
-            Scroll
-         </span>
+         <span className="text-[10px] font-black uppercase tracking-widest text-black dark:text-white">Scroll</span>
       </motion.div>
-      {/* ----------------------------------------- */}
-
     </section>
   );
 };
 
+// Komponen Tombol Sosial Media
 const SocialBtn = ({ href, icon, label }) => (
     <a 
       href={href} 
