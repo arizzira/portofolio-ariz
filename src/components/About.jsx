@@ -130,6 +130,7 @@ const About = () => {
                         <div className="w-12 h-2 bg-black dark:bg-white mb-4"></div>
                         <p className="font-bold text-xl leading-tight text-black dark:text-white">Dicoding x Accenture</p>
                         <p className="font-mono text-sm font-semibold mt-1 text-black/80 dark:text-white/70">Capstone Project (Frontend Arch)</p>
+                        
                     </motion.div>
 
                     {/* 2. EDUCATION CARD */}
@@ -146,7 +147,7 @@ const About = () => {
                         <h4 className="text-2xl font-black text-black dark:text-white uppercase mb-2">Education</h4>
                         <div className="w-12 h-2 bg-black dark:bg-white mb-4"></div>
                         <p className="font-bold text-xl leading-tight text-black dark:text-white">STIKOM Poltek Cirebon</p>
-                        <p className="font-mono text-sm font-semibold mt-1 text-black/80 dark:text-white/70">Informatics Engineering (D3)</p>
+                        <p className="font-mono text-sm font-semibold mt-1 text-black/80 dark:text-white/70">Informatics Engineering (S1)</p>
                     </motion.div>
 
                     {/* 3. TECH STACK (Horizontal Scroll-like visual) */}
@@ -162,7 +163,7 @@ const About = () => {
                             <FaPuzzlePiece className="text-2xl text-black dark:text-white animate-pulse" />
                         </div>
                         <div className="flex flex-wrap gap-2">
-                             {['React', 'Tailwind', 'Vite', 'Golang', 'PostgreSQL'].map((tech) => (
+                             {['React', 'Tailwind', 'Vite', 'Express.Js', 'PostgreSQL'].map((tech) => (
                                 <span key={tech} className="bg-black dark:bg-white text-white dark:text-black px-3 py-1 font-mono text-xs font-bold border-2 border-transparent hover:bg-transparent hover:text-black dark:hover:text-white hover:border-black dark:hover:border-white transition-colors cursor-default">
                                     {tech}
                                 </span>

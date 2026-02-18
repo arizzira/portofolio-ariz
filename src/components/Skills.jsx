@@ -18,6 +18,9 @@ import phpLogo from '../assets/images/logoassets/phpp.png';
 import hapiLogo from '../assets/images/logoassets/hapi.png';
 import pythonLogo from '../assets/images/logoassets/pythonn.png';
 
+import expressLogo from '../assets/images/logoassets/express.png';
+import postgresLogo from '../assets/images/logoassets/postgres.png';
+
 const MarqueeText = ({ children, direction = 1 }) => {
   return (
     <div className="flex overflow-hidden whitespace-nowrap opacity-[0.04] dark:opacity-[0.05] select-none absolute top-32 w-full pointer-events-none z-0">
@@ -56,6 +59,8 @@ const Skills = () => {
       desc: "Logic Core",
       skills: [
         { name: "Node.js", img: nodeLogo },
+        { name: "Express.js", img: expressLogo },
+        { name: "PostgreSQL", img: postgresLogo },
         { name: "MySQL", img: mysqlLogo },
         { name: "PhpMyAdmin", img: pmaLogo },
       ]
