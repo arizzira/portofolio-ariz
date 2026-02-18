@@ -1,11 +1,12 @@
 @import "tailwindcss";
 
+@variant dark (&:where(.dark, .dark *));
+
 @theme {
   --font-display: "Inter", sans-serif;
   --font-mono: "Space Mono", monospace;
 }
 
-/* Base Styles */
 html.lenis, html.lenis body {
   height: auto;
 }
@@ -30,19 +31,16 @@ body {
   @apply antialiased transition-colors duration-700;
 }
 
-/* === PERUBAHAN DISINI === */
 
-/* LIGHT MODE: Pure White & Sharp Grid (Agar Kontras Maksimal) */
 html.light body {
-  background-color: #ffffff; /* UBAH DARI #f4f3ef KE #ffffff */
-  color: #000000; /* Pastikan text dasar hitam pekat */
+  background-color: #ffffff;
+  color: #000000;
   background-image: 
     linear-gradient(#e5e5e5 1px, transparent 1px),
     linear-gradient(90deg, #e5e5e5 1px, transparent 1px);
-  background-size: 50px 50px; /* Sedikit diperbesar agar lega */
+  background-size: 50px 50px;
 }
 
-/* DARK MODE: Digital Void & Glow */
 html.dark body {
   background-color: #050505;
   color: #ffffff;
@@ -51,7 +49,6 @@ html.dark body {
   background-size: 30px 30px;
 }
 
-/* Utility Custom untuk Brutalism */
 @layer utilities {
   .brutal-shadow {
     box-shadow: 4px 4px 0px 0px rgba(0,0,0,1);

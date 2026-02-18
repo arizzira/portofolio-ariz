@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { FaGithub, FaLinkedin, FaArrowDown, FaEnvelope, FaDownload } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaArrowDown, FaEnvelope, FaDownload, FaCircle } from "react-icons/fa";
 import profileImg from "../assets/images/profile/profile.png";
 import cvFile from "../assets/cv-ariz.pdf"; 
 
@@ -11,78 +11,72 @@ const Hero = () => {
     target: ref,
     offset: ["start start", "end start"],
   });
+  
   const xMove = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
+  const yMove = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
 
   return (
     <section 
       ref={ref} 
       id="home" 
-      // PERBAIKAN 1: Ukuran tinggi dikurangi dari 110vh ke min-h-screen (standar) atau auto
-      // PERBAIKAN 2: Background light mode jadi Putih (bg-white) biar jelas aktifnya
-      className="relative min-h-screen flex flex-col justify-center overflow-hidden px-6 pt-28 pb-10 bg-white dark:bg-[#050505] transition-colors duration-500"
+      className="relative min-h-screen flex flex-col justify-center overflow-hidden px-6 pt-28 pb-10 transition-colors duration-500 bg-white dark:bg-[#050505]"
     >
       
-      {/* Background Dynamic */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        {/* Grid Pattern: Lebih halus di light mode */}
-        <div className="absolute inset-0 bg-[size:40px_40px] bg-[linear-gradient(to_right,#00000005_1px,transparent_1px),linear-gradient(to_bottom,#00000005_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)]"></div>
+        <div className="absolute inset-0 opacity-40 dark:opacity-0 bg-[radial-gradient(#000000_1px,transparent_1px)] [background-size:20px_20px]"></div>
         
-        {/* Marquee Text: Ukuran font dikurangi dari 18vw ke 12vw */}
+        <div className="absolute inset-0 opacity-0 dark:opacity-100 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:40px_40px]"></div>
+        
         <motion.div 
           style={{ x: xMove }}
-          className="absolute top-[15%] -left-[5%] whitespace-nowrap text-[12vw] font-black uppercase leading-none text-slate-200/40 dark:text-white/5 select-none"
+          className="absolute top-[20%] -left-[10%] whitespace-nowrap text-[15vw] font-black uppercase leading-none text-slate-100 dark:text-white/5 select-none"
         >
-          CREATIVE DEVELOPER CREATIVE DEVELOPER
+          CREATIVE DEV
         </motion.div>
       </div>
 
-      <div className="max-w-6xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-0 items-center relative z-10">
+      <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-0 items-center relative z-10">
         
-        {/* === LEFT: TEXT CONTENT === */}
         <div className="flex flex-col gap-6 order-2 lg:order-1 relative">
           
-          {/* Badge */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             className="w-fit"
           >
-            <div className="flex items-center gap-2 px-4 py-1.5 bg-slate-100 dark:bg-zinc-900 border border-slate-300 dark:border-white shadow-sm dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] rounded-full lg:rounded-none lg:border-2 lg:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-              <span className="relative flex h-2.5 w-2.5">
+            <div className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-zinc-900 border-2 border-black dark:border-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)]">
+              <span className="relative flex h-3 w-3">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500 border border-black/10"></span>
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500 border border-black"></span>
               </span>
-              <span className="font-bold font-mono text-xs tracking-wider uppercase text-slate-900 dark:text-white">
-                Open for Work
+              <span className="font-bold font-mono text-xs tracking-wider uppercase text-black dark:text-white">
+                Available for Projects
               </span>
             </div>
           </motion.div>
 
-          {/* Headline: Ukuran font dikurangi agar "sedang" */}
           <div className="relative z-20">
             <motion.h1 
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              // PERBAIKAN: Font size dikecilkan (text-5xl -> text-7xl)
-              className="text-5xl sm:text-6xl md:text-7xl font-black leading-[0.95] tracking-tight text-slate-900 dark:text-white"
+              className="text-6xl sm:text-7xl md:text-8xl font-black leading-[0.9] tracking-tighter"
             >
-              FULLSTACK <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600 dark:from-indigo-400 dark:to-cyan-400">
+              <span className="text-black dark:text-white">FULLSTACK</span> <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600 dark:from-indigo-400 dark:to-cyan-400 stroke-black dark:stroke-white stroke-2 md:stroke-0">
                 ENGINEER
               </span>
             </motion.h1>
           </div>
 
-          {/* Deskripsi: Ukuran font disesuaikan */}
           <motion.p 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-base md:text-lg font-medium text-slate-700 dark:text-zinc-300 max-w-lg leading-relaxed border-l-4 border-indigo-500 pl-5"
+            className="text-lg md:text-xl font-medium text-slate-800 dark:text-zinc-300 max-w-lg leading-relaxed border-l-4 border-black dark:border-indigo-500 pl-6"
           >
-            Hi, I'm <strong>Muhammad Ariz</strong>. Transforming abstract ideas into <span className="bg-yellow-200 dark:bg-indigo-600 px-1 text-slate-900 dark:text-white rounded-sm">high-performance</span> web applications.
+            Hi, I'm <strong>Muhammad Ariz</strong>. I craft <span className="bg-yellow-300 dark:bg-indigo-600 px-1 border border-black dark:border-transparent text-black dark:text-white">high-performance</span> web experiences with modern technologies and clean code.
           </motion.p>
 
           {/* Buttons Area */}
@@ -90,47 +84,54 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="flex flex-wrap gap-3 mt-2"
+            className="flex flex-wrap gap-4 mt-4"
           >
             <a 
               href={cvFile} 
               download 
-              // PERBAIKAN: Tombol di Light Mode jadi Hitam solid agar kontras
-              className="group relative px-6 py-3 bg-slate-900 dark:bg-white text-white dark:text-black font-bold uppercase text-sm md:text-base hover:-translate-y-0.5 hover:shadow-lg transition-all border-2 border-transparent rounded-lg lg:rounded-none lg:hover:shadow-none lg:shadow-[6px_6px_0px_0px_#6366f1]"
+              className="group relative px-8 py-4 bg-black dark:bg-white text-white dark:text-black font-black uppercase text-sm md:text-base hover:-translate-y-1 transition-all border-2 border-transparent shadow-[6px_6px_0px_0px_#818cf8] dark:shadow-[6px_6px_0px_0px_#4f46e5] hover:shadow-none hover:translate-x-[3px] hover:translate-y-[3px]"
             >
                <span className="flex items-center gap-2">
                  <FaDownload /> Download CV
                </span>
             </a>
             
-            <div className="flex gap-2">
+            <div className="flex gap-3">
                 <SocialBtn href="https://github.com/arizzira" icon={<FaGithub />} label="GitHub" />
-                <SocialBtn href="https://linkedin.com/in/muhammad-ariz" icon={<FaLinkedin />} label="LinkedIn" />
+                <SocialBtn href="https://www.linkedin.com/in/muhammad-ariz-77949a277/" icon={<FaLinkedin />} label="LinkedIn" />
                 <SocialBtn href="mailto:arizgg6@gmail.com" icon={<FaEnvelope />} label="Email" />
             </div>
           </motion.div>
         </div>
 
-        {/* === RIGHT: IMAGE (UKURAN SEDANG) === */}
-        <div className="relative order-1 lg:order-2 flex justify-center lg:justify-end items-center">
+        {/* === RIGHT: IMAGE === */}
+        <div className="relative order-1 lg:order-2 flex justify-center lg:justify-end items-center mt-10 lg:mt-0">
             
             <motion.div 
                initial={{ scale: 0.9, opacity: 0 }} 
                animate={{ scale: 1, opacity: 1 }}
                transition={{ type: "spring", duration: 0.8 }}
-               // PERBAIKAN: Ukuran container gambar dibatasi (max-w-[380px] di desktop)
-               className="relative w-[280px] h-[350px] md:w-[320px] md:h-[400px] lg:w-[380px] lg:h-[480px] z-10 cursor-pointer group"
+               className="relative z-10 cursor-pointer group w-[280px] md:w-[350px] lg:w-[400px] aspect-[4/5]"
             >
-                {/* Decorative Shapes */}
-                <div className="absolute top-6 -left-6 w-full h-full border-2 lg:border-4 border-slate-900 dark:border-white bg-transparent z-0 transition-all duration-300 group-hover:top-4 group-hover:-left-4"></div>
-                <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-purple-500/30 rounded-full blur-[60px] z-0"></div>
+                {/* Decorative Elements Light Mode */}
+                <div className="absolute -top-4 -right-4 w-12 h-12 bg-yellow-400 border-2 border-black rounded-full z-20 flex items-center justify-center dark:hidden">
+                    <FaArrowDown className="-rotate-45 text-black" />
+                </div>
+
+                {/* Back Shape (Shadow) */}
+                <div className="absolute inset-0 bg-black dark:bg-indigo-600 translate-x-3 translate-y-3 md:translate-x-5 md:translate-y-5 border-2 border-black dark:border-none transition-transform duration-300 group-hover:translate-x-2 group-hover:translate-y-2"></div>
 
                 {/* Main Image Frame */}
-                <div className="w-full h-full bg-white dark:bg-zinc-800 border-2 lg:border-4 border-slate-900 dark:border-white overflow-hidden relative shadow-[8px_8px_0px_0px_rgba(0,0,0,0.8)] dark:shadow-[8px_8px_0px_0px_#4f46e5]">
+                <div className="absolute inset-0 bg-white dark:bg-zinc-800 border-4 border-black dark:border-white overflow-hidden">
+                    {/* LOGIKA CSS FIX MOBILE:
+                       1. grayscale-0 (default) -> Mobile langsung berwarna
+                       2. md:grayscale (desktop only) -> Desktop jadi hitam putih
+                       3. md:group-hover:grayscale-0 -> Desktop jadi berwarna saat di-hover
+                    */}
                     <img 
                       src={profileImg} 
                       alt="Muhammad Ariz" 
-                      className="w-full h-full object-cover object-top grayscale group-hover:grayscale-0 transition-all duration-500" 
+                      className="w-full h-full object-cover object-top grayscale-0 md:grayscale md:group-hover:grayscale-0 transition-all duration-500 scale-100 group-hover:scale-105" 
                     />
                 </div>
             </motion.div>
@@ -141,25 +142,25 @@ const Hero = () => {
       {/* Scroll Down Indicator */}
       <motion.div 
         initial={{ opacity: 0 }}
-        animate={{ opacity: 1, y: [0, 8, 0] }} 
-        transition={{ delay: 1, duration: 1.5, repeat: Infinity }}
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1"
+        animate={{ opacity: 1, y: [0, 10, 0] }} 
+        transition={{ delay: 1, duration: 2, repeat: Infinity }}
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
       >
-         <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 dark:text-white/50">Scroll</span>
-         <FaArrowDown className="text-slate-400 dark:text-white text-sm" />
+         <div className="w-[2px] h-12 bg-gradient-to-b from-transparent via-black dark:via-white to-transparent"></div>
+         <span className="text-[10px] font-black uppercase tracking-widest text-black dark:text-white">Scroll</span>
       </motion.div>
     </section>
   );
 };
 
+// Komponen Tombol Sosial Media
 const SocialBtn = ({ href, icon, label }) => (
     <a 
       href={href} 
       target="_blank" 
       rel="noreferrer"
       aria-label={label}
-      // PERBAIKAN: Warna tombol disesuaikan agar terlihat di mode terang
-      className="w-12 h-12 flex items-center justify-center bg-white dark:bg-black border border-slate-300 lg:border-2 lg:border-black dark:border-white text-xl text-slate-900 dark:text-white hover:bg-yellow-300 dark:hover:bg-indigo-600 transition-all shadow-sm lg:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] lg:hover:shadow-none lg:hover:translate-x-[2px] lg:hover:translate-y-[2px] rounded-lg lg:rounded-none"
+      className="w-12 h-12 md:w-14 md:h-14 flex items-center justify-center bg-white dark:bg-black border-2 border-black dark:border-white text-xl md:text-2xl text-black dark:text-white hover:bg-yellow-300 dark:hover:bg-indigo-600 transition-all shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px]"
     >
         {icon}
     </a>

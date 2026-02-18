@@ -22,23 +22,19 @@ const Footer = () => {
   return (
     <footer className="bg-white dark:bg-[#0a0a0a] text-black dark:text-white border-t-4 border-black dark:border-white relative overflow-hidden transition-colors duration-500">
         
-        {/* 1. Background Grid Pattern (Agar nyambung dengan section atasnya) */}
         <div className="absolute inset-0 bg-[size:40px_40px] bg-[linear-gradient(to_right,#00000005_1px,transparent_1px),linear-gradient(to_bottom,#00000005_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] pointer-events-none z-0"></div>
 
-        {/* Top Strip Decoration */}
         <div className="h-4 w-full bg-[repeating-linear-gradient(45deg,#000,#000_10px,#ff90e8_10px,#ff90e8_20px)] dark:bg-[repeating-linear-gradient(45deg,#fff,#fff_10px,#6366f1_10px,#6366f1_20px)] border-b-4 border-black dark:border-white relative z-10"></div>
 
       <div className="max-w-7xl mx-auto px-6 py-16 relative z-10">
         <div className="flex flex-col md:flex-row justify-between items-start gap-12 md:gap-0">
           
-          {/* Column 1: Brand & Contact Info */}
           <div className="space-y-6">
              <div className="inline-block bg-black dark:bg-white text-white dark:text-black px-4 py-2 font-black text-3xl uppercase -rotate-2 shadow-[4px_4px_0px_0px_rgba(168,85,247,1)]">
                 Ariz.
              </div>
              
             <div className="flex flex-col gap-4 text-base font-mono font-medium text-zinc-700 dark:text-zinc-300">
-                {/* Email */}
                 <a href="mailto:arizgg6@gmail.com" className="flex items-center gap-3 hover:text-indigo-600 transition-colors group w-fit">
                     <div className="p-2 border-2 border-black dark:border-white bg-white dark:bg-black group-hover:bg-[#ff90e8] transition-colors shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] dark:shadow-[3px_3px_0px_0px_rgba(255,255,255,1)]">
                         <MdEmail className="text-black dark:text-white" />
@@ -46,7 +42,6 @@ const Footer = () => {
                     <span>arizgg6@gmail.com</span>
                 </a>
                 
-                {/* Location (Clickable) */}
                 <a 
                     href="https://goo.gl/maps/something" 
                     target="_blank" 
@@ -61,7 +56,6 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Column 2: Navigation Links */}
           <div className="w-full md:w-auto">
             <h3 className="text-xl font-black uppercase text-black dark:text-white mb-6 border-b-4 border-[#ff90e8] w-fit">Quick Links</h3>
             <div className="flex flex-col gap-3 font-bold uppercase">
@@ -79,7 +73,6 @@ const Footer = () => {
             </div>
           </div>
 
-           {/* Column 3: Back to Top */}
            <div className="flex flex-col items-start md:items-end">
               <button 
                 onClick={scrollToTop}
@@ -91,7 +84,6 @@ const Footer = () => {
 
         </div>
 
-        {/* Bottom Bar: Copyright */}
         <div className="mt-16 pt-8 border-t-4 border-black dark:border-white flex flex-col md:flex-row justify-between items-center gap-4 font-mono text-xs md:text-sm font-bold text-zinc-600 dark:text-zinc-400">
           <p>© {new Date().getFullYear()} MUHAMMAD ARIZ. NO RIGHTS RESERVED.</p>
           <p>BUILT WITH <span className="bg-black text-white px-1">REACT</span> + <span className="bg-[#38bdf8] text-black px-1">TAILWIND</span></p>
