@@ -38,7 +38,6 @@ const Hero = () => {
       <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-0 items-center relative z-10">
         
         <div className="flex flex-col gap-6 order-2 lg:order-1 relative">
-          
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -79,7 +78,6 @@ const Hero = () => {
             Hi, I'm <strong>Muhammad Ariz</strong>. I craft <span className="bg-yellow-300 dark:bg-indigo-600 px-1 border border-black dark:border-transparent text-black dark:text-white">high-performance</span> web experiences with modern technologies and clean code.
           </motion.p>
 
-          {/* Buttons Area */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -104,7 +102,6 @@ const Hero = () => {
           </motion.div>
         </div>
 
-        {/* === RIGHT: IMAGE === */}
         <div className="relative order-1 lg:order-2 flex justify-center lg:justify-end items-center mt-10 lg:mt-0">
             
             <motion.div 
@@ -113,21 +110,13 @@ const Hero = () => {
                transition={{ type: "spring", duration: 0.8 }}
                className="relative z-10 cursor-pointer group w-[280px] md:w-[350px] lg:w-[400px] aspect-[4/5]"
             >
-                {/* Decorative Elements Light Mode */}
                 <div className="absolute -top-4 -right-4 w-12 h-12 bg-yellow-400 border-2 border-black rounded-full z-20 flex items-center justify-center dark:hidden">
                     <FaArrowDown className="-rotate-45 text-black" />
                 </div>
 
-                {/* Back Shape (Shadow) */}
                 <div className="absolute inset-0 bg-black dark:bg-indigo-600 translate-x-3 translate-y-3 md:translate-x-5 md:translate-y-5 border-2 border-black dark:border-none transition-transform duration-300 group-hover:translate-x-2 group-hover:translate-y-2"></div>
 
-                {/* Main Image Frame */}
                 <div className="absolute inset-0 bg-white dark:bg-zinc-800 border-4 border-black dark:border-white overflow-hidden">
-                    {/* LOGIKA CSS FIX MOBILE:
-                       1. grayscale-0 (default) -> Mobile langsung berwarna
-                       2. md:grayscale (desktop only) -> Desktop jadi hitam putih
-                       3. md:group-hover:grayscale-0 -> Desktop jadi berwarna saat di-hover
-                    */}
                     <img 
                       src={profileImg} 
                       alt="Muhammad Ariz" 
@@ -139,7 +128,6 @@ const Hero = () => {
 
       </div>
 
-      {/* Scroll Down Indicator */}
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1, y: [0, 10, 0] }} 
@@ -153,7 +141,6 @@ const Hero = () => {
   );
 };
 
-// Komponen Tombol Sosial Media
 const SocialBtn = ({ href, icon, label }) => (
     <a 
       href={href} 
